@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2019 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -276,8 +276,10 @@
   #define AUTOTEMP_OLDWEIGHT 0.98
 #endif
 
-// Show extra position information with 'M114 D'
-//#define M114_DETAIL
+// Extra options for the M114 "Current Position" report
+//#define M114_DETAIL         // Use 'M114` for details to check planner calculations
+//#define M114_REALTIME       // Real current position based on forward kinematics
+//#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
@@ -336,8 +338,9 @@
  * Controller Fan
  * To cool down the stepper drivers and MOSFETs.
  *
- * The fan will turn on automatically whenever any stepper is enabled
- * and turn off after a set period after all steppers are turned off.
+ * The fan turns on automatically whenever any driver is enabled and turns
+ * off (or reduces to idle speed) shortly after drivers are turned off.
+ *
  */
 //#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
@@ -2003,7 +2006,7 @@
     #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16    // 0..256
-    #define X_RSENSE          0.11
+    #define X_RSENSE          0.075
     #define X_CHAIN_POS      -1    // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
   #endif
 
@@ -2011,7 +2014,7 @@
     #define X2_CURRENT      800
     #define X2_CURRENT_HOME X2_CURRENT
     #define X2_MICROSTEPS    16
-    #define X2_RSENSE         0.11
+    #define X2_RSENSE         0.075
     #define X2_CHAIN_POS     -1
   #endif
 
@@ -2019,7 +2022,7 @@
     #define Y_CURRENT       800
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
-    #define Y_RSENSE          0.11
+    #define Y_RSENSE          0.075
     #define Y_CHAIN_POS      -1
   #endif
 
@@ -2027,7 +2030,7 @@
     #define Y2_CURRENT      800
     #define Y2_CURRENT_HOME Y2_CURRENT
     #define Y2_MICROSTEPS    16
-    #define Y2_RSENSE         0.11
+    #define Y2_RSENSE         0.075
     #define Y2_CHAIN_POS     -1
   #endif
 
@@ -2035,7 +2038,7 @@
     #define Z_CURRENT       800
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
-    #define Z_RSENSE          0.11
+    #define Z_RSENSE          0.075
     #define Z_CHAIN_POS      -1
   #endif
 
@@ -2043,7 +2046,7 @@
     #define Z2_CURRENT      800
     #define Z2_CURRENT_HOME Z2_CURRENT
     #define Z2_MICROSTEPS    16
-    #define Z2_RSENSE         0.11
+    #define Z2_RSENSE         0.075
     #define Z2_CHAIN_POS     -1
   #endif
 
@@ -2051,7 +2054,7 @@
     #define Z3_CURRENT      800
     #define Z3_CURRENT_HOME Z3_CURRENT
     #define Z3_MICROSTEPS    16
-    #define Z3_RSENSE         0.11
+    #define Z3_RSENSE         0.075
     #define Z3_CHAIN_POS     -1
   #endif
 
@@ -2059,63 +2062,63 @@
     #define Z4_CURRENT      800
     #define Z4_CURRENT_HOME Z4_CURRENT
     #define Z4_MICROSTEPS    16
-    #define Z4_RSENSE         0.11
+    #define Z4_RSENSE         0.075
     #define Z4_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E0)
     #define E0_CURRENT      800
     #define E0_MICROSTEPS    16
-    #define E0_RSENSE         0.11
+    #define E0_RSENSE         0.075
     #define E0_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E1)
     #define E1_CURRENT      800
     #define E1_MICROSTEPS    16
-    #define E1_RSENSE         0.11
+    #define E1_RSENSE         0.075
     #define E1_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E2)
     #define E2_CURRENT      800
     #define E2_MICROSTEPS    16
-    #define E2_RSENSE         0.11
+    #define E2_RSENSE         0.075
     #define E2_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E3)
     #define E3_CURRENT      800
     #define E3_MICROSTEPS    16
-    #define E3_RSENSE         0.11
+    #define E3_RSENSE         0.075
     #define E3_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E4)
     #define E4_CURRENT      800
     #define E4_MICROSTEPS    16
-    #define E4_RSENSE         0.11
+    #define E4_RSENSE         0.075
     #define E4_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E5)
     #define E5_CURRENT      800
     #define E5_MICROSTEPS    16
-    #define E5_RSENSE         0.11
+    #define E5_RSENSE         0.075
     #define E5_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E6)
     #define E6_CURRENT      800
     #define E6_MICROSTEPS    16
-    #define E6_RSENSE         0.11
+    #define E6_RSENSE         0.075
     #define E6_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E7)
     #define E7_CURRENT      800
     #define E7_MICROSTEPS    16
-    #define E7_RSENSE         0.11
+    #define E7_RSENSE         0.075
     #define E7_CHAIN_POS     -1
   #endif
 
@@ -2144,7 +2147,7 @@
    * The default SW SPI pins are defined the respective pins files,
    * but you can override or define them here.
    */
-  //#define TMC_USE_SW_SPI
+  #define TMC_USE_SW_SPI
   //#define TMC_SW_MOSI       -1
   //#define TMC_SW_MISO       -1
   //#define TMC_SW_SCK        -1
@@ -2209,7 +2212,7 @@
    * Define you own with
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V
 
   /**
    * Monitor Trinamic drivers for error conditions,
@@ -2222,7 +2225,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -2237,7 +2240,7 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
   #define X_HYBRID_THRESHOLD     100  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
@@ -2309,7 +2312,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -2765,6 +2768,12 @@
  */
 #define FASTER_GCODE_PARSER
 
+#if ENABLED(FASTER_GCODE_PARSER)
+  //#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
+#endif
+
+//#define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
+
 /**
  * CNC G-code options
  * Support CNC-style G-code dialects used by laser cutters, drawing machine cams, etc.
@@ -2964,7 +2973,7 @@
   #define MAX7219_LOAD_PIN  44
 
   //#define MAX7219_GCODE          // Add the M7219 G-code to control the LED matrix
-  #define MAX7219_INIT_TEST    2   // Do a test pattern at initialization (Set to 2 for spiral)
+  #define MAX7219_INIT_TEST    2   // Test pattern at startup: 0=none, 1=sweep, 2=spiral
   #define MAX7219_NUMBER_UNITS 1   // Number of Max7219 units in chain.
   #define MAX7219_ROTATE       0   // Rotate the display clockwise (in multiples of +/- 90°)
                                    // connector at:  right=0   bottom=-90  top=90  left=180
@@ -3004,11 +3013,19 @@
 //#define ESP3D_WIFISUPPORT   // ESP3D Library WiFi management (https://github.com/luc-github/ESP3DLib)
 
 #if EITHER(WIFISUPPORT, ESP3D_WIFISUPPORT)
-  #define WIFI_SSID "Wifi SSID"
-  #define WIFI_PWD  "Wifi Password"
   //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery)
   //#define OTASUPPORT          // Support over-the-air firmware updates
   //#define WIFI_CUSTOM_COMMAND // Accept feature config commands (e.g., WiFi ESP3D) from the host
+
+  /**
+   * To set a default WiFi SSID / Password, create a file called Configuration_Secure.h with
+   * the following defines, customized for your network. This specific file is excluded via
+   * .gitignore to prevent it from accidentally leaking to the public.
+   *
+   *   #define WIFI_SSID "WiFi SSID"
+   *   #define WIFI_PWD  "WiFi Password"
+   */
+  //#include "Configuration_Secure.h" // External file with WiFi SSID / Password
 #endif
 
 /**
